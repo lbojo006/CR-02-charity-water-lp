@@ -1,47 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charity: Water Landing Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
 
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
+  <header class="hero">
+    <h1>Turn Compassion Into Clean Water</h1>
+    <p>Provide Our Water, Protect Our Future, Be the Change</p>
+  </header>
 
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
-            <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
-            </p>
-        </div>
-    </section>
+  <section class="story-section">
+    <div class="story-text">
+      <h2>Real Impact</h2>
+      <p>Meet Lien, a young girl from Nepal whose life changed after gaining access to clean water. What once took hours to collect is now just steps away. Her health improved, school attendance rose, and she now dreams of becoming a teacher.</p>
+    </div>
+    <div class="story-image">
+      <img src="img/Nepal_JS_Girl_Drinkingwater.jfif" alt="Girl drinking clean water">
+    </div>
+  </section>
 
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
-    </section>
+  <section class="cta-section">
+    <h2>Make a Difference</h2>
+    <p>Every drop counts. Your donation brings clean water to communities in need.</p>
+    <button class="donate-btn">Donate Now</button>
+  </section>
+
+  <footer>
+    <img src="img/cw_logo.png" alt="charity: water logo" style="height: 40px; opacity: 0.8;">
+    <p style="margin-top: 10px; font-size: 0.9rem;">&copy; 2025 All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for confetti effect from button -->
+  <script>
+    // Function to create confetti explosion from button
+    function createConfettiFromButton(button) {
+      const buttonRect = button.getBoundingClientRect();
+      const buttonCenterX = buttonRect.left + buttonRect.width / 2;
+      const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+      
+      // Create confetti container
+      const confettiContainer = document.createElement('div');
+      confettiContainer.style.position = 'fixed';
+      confettiContainer.style.top = '0';
+      confettiContainer.style.left = '0';
+      confettiContainer.style.width = '100%';
+      confettiContainer.style.height = '100%';
+      confettiContainer.style.pointerEvents = 'none';
+      confettiContainer.style.zIndex = '9999';
+      document.body.appendChild(confettiContainer);
+
+      // Create confetti pieces that explode from button
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'absolute';
+        confetti.style.width = '8px';
+        confetti.style.height = '8px';
+        confetti.style.backgroundColor = getRandomColor();
+        confetti.style.left = buttonCenterX + 'px';
+        confetti.style.top = buttonCenterY + 'px';
+        confetti.style.borderRadius = '50%';
+        
+        // Random direction and speed for explosion effect
+        const angle = (Math.PI * 2 * i) / 30;
+        const speed = Math.random() * 200 + 100;
+        const xSpeed = Math.cos(angle) * speed;
+        const ySpeed = Math.sin(angle) * speed;
+        
+        confetti.style.animation = `explode 2s ease-out forwards`;
+        confetti.style.setProperty('--x-speed', xSpeed + 'px');
+        confetti.style.setProperty('--y-speed', ySpeed + 'px');
+        
+        confettiContainer.appendChild(confetti);
+      }
+
+      // Remove confetti after animation
+      setTimeout(() => {
+        document.body.removeChild(confettiContainer);
+      }, 2000);
+    }
+
+    // Function to show thank you message
+    function showThankYouMessage() {
+      const thankYou = document.createElement('div');
+      thankYou.textContent = 'Thank you! 💧';
+      thankYou.style.position = 'fixed';
+      thankYou.style.top = '50%';
+      thankYou.style.left = '50%';
+      thankYou.style.transform = 'translate(-50%, -50%)';
+      thankYou.style.fontSize = '2rem';
+      thankYou.style.fontWeight = 'bold';
+      thankYou.style.color = '#fff7e1';
+      thankYou.style.textShadow = '2px 2px 4px rgba(0,0,0,0.8)';
+      thankYou.style.zIndex = '10000';
+      thankYou.style.animation = 'fadeInOut 3s ease-in-out forwards';
+      thankYou.style.pointerEvents = 'none';
+      
+      document.body.appendChild(thankYou);
+      
+      // Remove thank you message after animation
+      setTimeout(() => {
+        document.body.removeChild(thankYou);
+      }, 3000);
+    }
+
+    // Function to get random confetti colors
+    function getRandomColor() {
+      const colors = ['#FFC907', '#2E9DF7', '#4FCB53', '#FF902A', '#F5402C', '#F16061'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    // Add click event to donate button
+    document.addEventListener('DOMContentLoaded', function() {
+      const donateBtn = document.querySelector('.donate-btn');
+      donateBtn.addEventListener('click', function() {
+        createConfettiFromButton(this);
+        showThankYouMessage();
+      });
+    });
+  </script>
+
+  <!-- CSS for confetti and thank you animations -->
+  <style>
+    @keyframes explode {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x-speed), var(--y-speed)) scale(0);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeInOut {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+      }
+      20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+      80% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+      }
+    }
+  </style>
+
 </body>
 </html>
